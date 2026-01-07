@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, MessageSquare } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { supabase } from '../lib/supabase';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Contact() {
   const { t, language } = useLanguage();
@@ -20,23 +21,12 @@ export default function Contact() {
 
     try {
       const { error } = await supabase.from('contact_submissions').insert([
-        {
-          ...formData,
-          language,
-        },
+        { ...formData, language },
       ]);
-
       if (error) throw error;
 
       setStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -45,189 +35,216 @@ export default function Contact() {
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <section id="contact" className="relative py-24 bg-white overflow-hidden">
+      {/* Premium Background Background Pattern */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center px-4 py-1.5 mb-4 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-sm font-medium">
+            <MessageSquare className="w-4 h-4 mr-2" />
+            {t.contact.badge || "Get in Touch"}
+          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
             {t.contact.title}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
             {t.contact.subtitle}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div>
-            <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-8 text-white shadow-2xl">
-              <h3 className="text-2xl font-bold mb-8">
-                {t.contact.info.address}
-              </h3>
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Contact Information Side */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 space-y-6"
+          >
+            <div className="relative group overflow-hidden bg-slate-900 rounded-[2rem] p-10 text-white shadow-2xl">
+              {/* Subtle mesh gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-50"></div>
+              
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold mb-8">{t.contact.info.header || "Contact Info"}</h3>
 
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="font-semibold mb-1">{t.contact.info.address}</div>
-                    <div className="text-blue-100">{t.contact.info.addressText}</div>
-                  </div>
+                <div className="space-y-8">
+                  <ContactItem icon={<MapPin />} title={t.contact.info.address} text={t.contact.info.addressText} />
+                  <ContactItem icon={<Mail />} title={t.contact.info.email} text={t.contact.info.emailText} />
+                  <ContactItem icon={<Phone />} title={t.contact.info.phone} text={t.contact.info.phoneText} />
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="font-semibold mb-1">{t.contact.info.email}</div>
-                    <div className="text-blue-100">{t.contact.info.emailText}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="font-semibold mb-1">{t.contact.info.phone}</div>
-                    <div className="text-blue-100">{t.contact.info.phoneText}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-white/20">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold mb-1">24/7</div>
-                    <div className="text-blue-100 text-sm">Support</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold mb-1">&lt;24h</div>
-                    <div className="text-blue-100 text-sm">Response</div>
+                <div className="mt-16 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                  <div className="grid grid-cols-2 gap-4 divide-x divide-white/10">
+                    <div className="text-center">
+                      <p className="text-blue-400 text-xs uppercase tracking-widest font-bold mb-1">Status</p>
+                      <div className="flex items-center justify-center text-lg font-semibold">
+                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                        Available
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-blue-400 text-xs uppercase tracking-widest font-bold mb-1">Response</p>
+                      <div className="text-lg font-semibold text-white">&lt; 24h</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t.contact.form.name}
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+          {/* Form Side */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-3 bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 p-8 md:p-12 border border-slate-100"
+          >
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-5">
+                <PremiumInput 
+                  label={t.contact.form.name} 
+                  name="name" 
+                  type="text" 
+                  value={formData.name} 
+                  onChange={handleChange} 
+                  required 
+                />
+                <PremiumInput 
+                  label={t.contact.form.email} 
+                  name="email" 
+                  type="email" 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  required 
                 />
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t.contact.form.email}
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              <div className="grid md:grid-cols-2 gap-5">
+                <PremiumInput 
+                  label={t.contact.form.phone} 
+                  name="phone" 
+                  type="tel" 
+                  value={formData.phone} 
+                  onChange={handleChange} 
+                />
+                <PremiumInput 
+                  label={t.contact.form.subject} 
+                  name="subject" 
+                  type="text" 
+                  value={formData.subject} 
+                  onChange={handleChange} 
+                  required 
                 />
               </div>
 
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t.contact.form.phone}
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t.contact.form.subject}
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t.contact.form.message}
-                </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows={5}
+                  rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
-                ></textarea>
+                  placeholder=" "
+                  className="peer w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white outline-none transition-all resize-none"
+                />
+                <label htmlFor="message" className="absolute left-5 top-4 text-slate-400 pointer-events-none transition-all peer-focus:-top-3 peer-focus:left-4 peer-focus:text-xs peer-focus:text-blue-600 peer-focus:bg-white peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:left-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-blue-600 peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-2">
+                  {t.contact.form.message}
+                </label>
               </div>
 
-              {status === 'success' && (
-                <div className="flex items-center space-x-2 text-green-600 bg-green-50 px-4 py-3 rounded-lg">
-                  <CheckCircle className="w-5 h-5" />
-                  <span className="font-medium">{t.contact.form.success}</span>
-                </div>
-              )}
-
-              {status === 'error' && (
-                <div className="flex items-center space-x-2 text-red-600 bg-red-50 px-4 py-3 rounded-lg">
-                  <AlertCircle className="w-5 h-5" />
-                  <span className="font-medium">{t.contact.form.error}</span>
-                </div>
-              )}
+              {/* Status Messages with AnimatePresence */}
+              <AnimatePresence mode="wait">
+                {status === 'success' && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex items-center space-x-2 text-emerald-600 bg-emerald-50 px-4 py-3 rounded-xl border border-emerald-100">
+                    <CheckCircle className="w-5 h-5 shrink-0" />
+                    <span className="font-medium text-sm">{t.contact.form.success}</span>
+                  </motion.div>
+                )}
+                {status === 'error' && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex items-center space-x-2 text-red-600 bg-red-50 px-4 py-3 rounded-xl border border-red-100">
+                    <AlertCircle className="w-5 h-5 shrink-0" />
+                    <span className="font-medium text-sm">{t.contact.form.error}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-lg font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 group"
+                className="group relative w-full overflow-hidden rounded-2xl bg-slate-900 py-4 font-bold text-white transition-all hover:bg-slate-800 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {status === 'sending' ? (
-                  <span>{t.contact.form.sending}</span>
-                ) : (
-                  <>
-                    <span>{t.contact.form.submit}</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
+                <div className="relative z-10 flex items-center justify-center gap-2">
+                  {status === 'sending' ? (
+                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>
+                      <span>{t.contact.form.submit}</span>
+                      <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
+                </div>
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+// Reusable Contact Info Item Component
+function ContactItem({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+  return (
+    <div className="flex items-center group">
+      <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300">
+        <div className="text-white w-6 h-6">
+          {icon}
+        </div>
+      </div>
+      <div className="ml-5">
+        <div className="text-xs uppercase tracking-widest text-blue-400 font-bold mb-0.5">{title}</div>
+        <div className="text-lg font-medium text-slate-100">{text}</div>
+      </div>
+    </div>
+  );
+}
+
+// Reusable Premium Input Component with Floating Label effect
+function PremiumInput({ label, name, type, value, onChange, required = false }: any) {
+  return (
+    <div className="relative">
+      <input
+        type={type}
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        placeholder=" "
+        className="peer w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white outline-none transition-all"
+      />
+      <label
+        htmlFor={name}
+        className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none transition-all
+                   peer-focus:-top-0 peer-focus:left-4 peer-focus:text-xs peer-focus:text-blue-600 peer-focus:bg-white peer-focus:px-2
+                   peer-[:not(:placeholder-shown)]:-top-0 peer-[:not(:placeholder-shown)]:left-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-blue-600 peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-2"
+      >
+        {label}
+      </label>
+    </div>
   );
 }
