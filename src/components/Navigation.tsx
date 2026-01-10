@@ -66,24 +66,30 @@ export default function Navigation() {
           : 'bg-transparent py-6'
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-6 md:px-12">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
         <div className="flex justify-between items-center">
           
-          {/* LOGO */}
+          {/* LOGO - Using SVG images with smooth transition */}
           <button 
             onClick={() => scrollToSection('home')}
-            className="flex items-center gap-3 group outline-none"
+            className="flex items-center outline-none group relative h-12 sm:h-14"
           >
-            <div className={`w-9 h-9 flex items-center justify-center font-black text-lg transition-all duration-500 ${
-              isScrolled ? 'bg-[#001B48] text-white' : 'bg-[#018ABE] text-white'
-            }`}>
-              N
-            </div>
-            <span className={`text-lg font-black tracking-[0.25em] transition-colors uppercase ${
-              isScrolled ? 'text-[#001B48]' : 'text-white'
-            }`}>
-              NOVAY<span className={isScrolled ? 'text-[#018ABE]' : 'text-[#97CADB]'}>TEK</span>
-            </span>
+            {/* White logo for transparent header */}
+            <img 
+              src="/images/LOGO_TEXT_WHITE.svg" 
+              alt="Novaytek Logo" 
+              className={`h-20 sm:h-22 md:h-24 w-auto transition-opacity duration-500 ${
+                isScrolled ? 'opacity-0 absolute' : 'opacity-100'
+              }`}
+            />
+            {/* Dark logo for scrolled header */}
+            <img 
+              src="/images/LOGO_TEXT.svg" 
+              alt="Novaytek Logo" 
+              className={`h-20 sm:h-22 md:h-24 w-auto transition-opacity duration-500 ${
+                isScrolled ? 'opacity-100' : 'opacity-0 absolute'
+              }`}
+            />
           </button>
 
           {/* DESKTOP LINKS */}
@@ -143,13 +149,14 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* MOBILE TOGGLE */}
+          {/* MOBILE TOGGLE - FIXED POSITIONING */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(true)}
-              className={isScrolled ? 'text-[#001B48]' : 'text-white'}
+              className={`p-2 ${isScrolled ? 'text-[#001B48]' : 'text-white'}`}
+              aria-label="Open menu"
             >
-              <Menu size={28} />
+              <Menu size={24} />
             </button>
           </div>
         </div>
@@ -175,44 +182,49 @@ export default function Navigation() {
               className="fixed right-0 top-0 h-[100dvh] w-full max-w-sm bg-white z-[200] flex flex-col shadow-[-20px_0_80px_rgba(0,0,0,0.3)] overflow-hidden"
             >
               {/* Header: Fixed Height */}
-              <div className="shrink-0 p-6 flex justify-between items-center border-b border-slate-100">
+              <div className="shrink-0 p-4 sm:p-6 flex justify-between items-center border-b border-slate-100">
                 <div className="flex items-center gap-2">
-                   <div className="bg-[#001B48] text-white w-8 h-8 flex items-center justify-center font-black text-xs">N</div>
-                   <span className="text-[10px] font-black tracking-[0.4em] text-[#001B48]">SYS_DIRECTORY</span>
+                   {/* Use dark logo in mobile menu */}
+                   <img 
+                     src="/images/LOGO_TEXT.svg" 
+                     alt="Novaytek Logo" 
+                     className="h-9 sm:h-10 w-auto"
+                   />
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="w-10 h-10 flex items-center justify-center text-[#001B48] bg-slate-50 border border-slate-100 active:scale-90"
+                  className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-[#001B48] bg-slate-50 border border-slate-100 active:scale-90"
+                  aria-label="Close menu"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
 
               {/* Language Selection: Top for Visibility */}
-              <div className="shrink-0 p-6 bg-slate-50/50">
-                 <p className="text-[9px] font-black uppercase tracking-[0.5em] text-slate-400 mb-4 flex items-center gap-2">
-                    <Globe size={12} className="text-[#018ABE]" /> PROTOCOL_LNG
+              <div className="shrink-0 p-4 sm:p-6 bg-slate-50/50">
+                 <p className="text-[9px] font-black uppercase tracking-[0.4em] sm:tracking-[0.5em] text-slate-400 mb-3 sm:mb-4 flex items-center gap-2">
+                    <Globe size={11} className="text-[#018ABE]" /> PROTOCOL_LNG
                  </p>
                  <div className="grid grid-cols-3 gap-2">
                     {languages.map(lang => (
                        <button
                           key={lang.code}
                           onClick={() => setLanguage(lang.code)}
-                          className={`py-3 flex flex-col items-center justify-center border transition-all ${
+                          className={`py-2.5 sm:py-3 flex flex-col items-center justify-center border transition-all ${
                             language === lang.code 
                             ? 'border-[#018ABE] bg-[#001B48] text-white shadow-lg' 
                             : 'border-slate-200 bg-white text-slate-400 grayscale'
                           }`}
                        >
-                          <span className="text-xl mb-1">{lang.flag}</span>
-                          <span className="text-[9px] font-black">{lang.code.toUpperCase()}</span>
+                          <span className="text-lg sm:text-xl mb-1">{lang.flag}</span>
+                          <span className="text-[8px] sm:text-[9px] font-black">{lang.code.toUpperCase()}</span>
                        </button>
                     ))}
                  </div>
               </div>
 
               {/* Nav Links: Flex-Grow expands but fits container */}
-              <div className="flex-grow flex flex-col justify-center px-8 gap-8">
+              <div className="flex-grow flex flex-col justify-center px-6 sm:px-8 gap-6 sm:gap-8">
                 {['home', 'projects', 'about', 'contact'].map((item, idx) => (
                   <motion.button
                     key={item}
@@ -220,21 +232,21 @@ export default function Navigation() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + idx * 0.05 }}
                     onClick={() => scrollToSection(item)}
-                    className="text-3xl font-black text-[#001B48] uppercase tracking-tighter text-left flex items-center justify-between group active:text-[#018ABE] transition-colors"
+                    className="text-2xl sm:text-3xl font-black text-[#001B48] uppercase tracking-tighter text-left flex items-center justify-between group active:text-[#018ABE] transition-colors"
                   >
                     { (t.nav as any)[item] }
-                    <ArrowUpRight className="text-[#97CADB] group-active:translate-x-1 transition-transform" size={24}/>
+                    <ArrowUpRight className="text-[#97CADB] group-active:translate-x-1 transition-transform" size={20}/>
                   </motion.button>
                 ))}
               </div>
 
               {/* CTA Bottom Button: Fixed at base */}
-              <div className="shrink-0 p-6 border-t border-slate-100">
+              <div className="shrink-0 p-4 sm:p-6 border-t border-slate-100">
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="w-full bg-[#018ABE] text-white py-5 text-[10px] font-black uppercase tracking-[0.4em] flex items-center justify-center gap-3 active:scale-[0.98] transition-all"
+                  className="w-full bg-[#018ABE] text-white py-4 sm:py-5 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] flex items-center justify-center gap-2 sm:gap-3 active:scale-[0.98] transition-all"
                 >
-                  REQUEST ACCESS <ArrowUpRight size={16} />
+                  REQUEST ACCESS <ArrowUpRight size={14} />
                 </button>
               </div>
             </motion.div>
