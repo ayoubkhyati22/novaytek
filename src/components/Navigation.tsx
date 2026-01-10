@@ -32,7 +32,7 @@ export default function Navigation() {
     <>
       <header className="fixed top-0 left-0 w-full z-[100] flex flex-col items-center pointer-events-none">
         
-        {/* LOGO: Sharp Central Alignment */}
+        {/* LOGO: Sharp Central Alignment - BIGGER */}
         <motion.div 
           animate={{ 
             height: isScrolled ? 0 : 'auto',
@@ -42,17 +42,16 @@ export default function Navigation() {
           className="pt-8 pb-4 pointer-events-auto overflow-hidden"
         >
           <button onClick={() => scrollToSection('home')} className="block">
-             <img src="/images/LOGO_TEXT_WHITE.svg" alt="Logo" className="h-16 md:h-24 w-auto" />
+             <img src="/images/LOGO_TEXT_WHITE.svg" alt="Logo" className="h-24 md:h-32 w-auto" />
           </button>
         </motion.div>
 
-        {/* NAVIGATION BEAM: Sharp Edges, High UX Localization */}
+        {/* NAVIGATION BEAM: Sharp Edges, High UX Localization - STAYS AT TOP */}
         <motion.nav
           initial={false}
           animate={{
             width: isScrolled ? '100%' : '90%',
             maxWidth: isScrolled ? '100%' : '500px',
-            marginTop: isScrolled ? '0px' : '10px',
           }}
           className={`
             pointer-events-auto flex items-stretch border transition-all duration-300
@@ -79,7 +78,7 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* DYNAMIC MIDDLE: Shows Logo on Scroll only */}
+          {/* DYNAMIC MIDDLE: Shows Logo on Scroll only - BIGGER LOGO */}
           <div className="flex-grow flex items-center justify-center">
             <AnimatePresence>
                 {isScrolled && (
@@ -88,7 +87,7 @@ export default function Navigation() {
                         animate={{ opacity: 1 }}
                         onClick={() => scrollToSection('home')}
                     >
-                        <img src="/images/LOGO_TEXT_WHITE.svg" className="h-5 opacity-80" alt="Logo" />
+                        <img src="/images/LOGO_TEXT_WHITE.svg" className="h-12 opacity-80" alt="Logo" />
                     </motion.button>
                 )}
             </AnimatePresence>
@@ -125,9 +124,9 @@ export default function Navigation() {
                  style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '50px 50px' }} 
             />
 
-            {/* Menu Header (Sharp Close Button) */}
+            {/* Menu Header (Sharp Close Button) - BIGGER LOGO */}
             <div className="flex justify-between items-center h-20 border-b border-white/10 px-8">
-                <img src="/images/LOGO_TEXT_WHITE.svg" className="h-6 opacity-30" alt="Novaytek" />
+                <img src="/images/LOGO_TEXT_WHITE.svg" className="h-16 opacity-30" alt="Novaytek" />
                 <button 
                   onClick={() => setIsOpen(false)}
                   className="h-full px-8 flex items-center gap-3 bg-white/5 hover:bg-white text-white hover:text-[#001B48] transition-all border-l border-white/10 uppercase text-[10px] font-black tracking-widest"
@@ -156,21 +155,7 @@ export default function Navigation() {
                      />
                   </button>
                ))}
-            </div>
-
-            {/* Footer Slab */}
-            <div className="h-24 grid grid-cols-3 border-t border-white/10">
-               <div className="col-span-2 flex items-center px-8 border-r border-white/10">
-                  <p className="text-white/20 text-[9px] uppercase font-black tracking-[0.5em]">
-                    Forward-Thinking Engineering / North Africa / EU
-                  </p>
-               </div>
-               <div className="flex items-center justify-center gap-8 text-white/50 text-[10px] font-bold">
-                  <a href="#" className="hover:text-[#018ABE]">LN</a>
-                  <a href="#" className="hover:text-[#018ABE]">IG</a>
-                  <a href="#" className="hover:text-[#018ABE]">BE</a>
-               </div>
-            </div>
+            </div>           
           </motion.div>
         )}
       </AnimatePresence>
