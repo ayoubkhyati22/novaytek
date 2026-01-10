@@ -1,0 +1,137 @@
+{
+    "hero": {
+      "backgroundImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
+      "taglineIcon": "Sparkles",
+      "primaryImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
+      "primaryImageAlt": "Architecture",
+      "floatingCard": {
+        "enabled": false,
+        "icon": "Shield",
+        "text": "Validated Protocol"
+      }
+    },
+    "metrics": {
+      "enabled": true,
+      "items": [
+        {
+          "value": 150,
+          "suffix": "+",
+          "labelKey": "projects"
+        },
+        {
+          "value": 98,
+          "suffix": "%",
+          "labelKey": "clients"
+        },
+        {
+          "value": 12,
+          "suffix": "+",
+          "labelKey": "years"
+        },
+        {
+          "value": 50,
+          "suffix": "+",
+          "labelKey": "team"
+        }
+      ]
+    },
+    "projects": {
+      "images": [
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80"
+      ],
+      "gridColumns": 3,
+      "showTechBadge": true
+    },
+    "about": {
+      "mainImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80",
+      "mainImageAlt": "Infrastructure",
+      "imageHeight": "700px",
+      "shadowColor": "#D6EBEE",
+      "borderColor": "#001B48",
+      "borderWidth": "12px",
+      "expertise": [
+        {
+          "icon": "Globe",
+          "labelKey": "strategic"
+        },
+        {
+          "icon": "Shield",
+          "labelKey": "security"
+        },
+        {
+          "icon": "Zap",
+          "labelKey": "performance"
+        },
+        {
+          "icon": "Target",
+          "labelKey": "execution"
+        }
+      ],
+      "expertiseLabels": {
+        "strategic": "Strategic Node",
+        "security": "Cipher Security",
+        "performance": "Ultra-Low Latency",
+        "execution": "Tactical Execution"
+      }
+    },
+    "contact": {
+      "formFields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "gridColumn": "half"
+        },
+        {
+          "name": "email",
+          "type": "email",
+          "required": true,
+          "gridColumn": "half"
+        },
+        {
+          "name": "subject",
+          "type": "text",
+          "required": true,
+          "gridColumn": "full"
+        },
+        {
+          "name": "message",
+          "type": "textarea",
+          "required": true,
+          "rows": 5,
+          "gridColumn": "full"
+        }
+      ],
+      "contactInfo": [
+        {
+          "icon": "Mail",
+          "labelKey": "emailText"
+        },
+        {
+          "icon": "Phone",
+          "labelKey": "phoneText"
+        },
+        {
+          "icon": "MapPin",
+          "labelKey": "addressText"
+        }
+      ]
+    },
+    "theme": {
+      "colors": {
+        "midnightNavy": "#001B48",
+        "deepBlue": "#02457A",
+        "oceanBlue": "#018ABE",
+        "softSkyBlue": "#97CADB",
+        "iceBlue": "#D6EBEE"
+      },
+      "animations": {
+        "smoothTransition": {
+          "duration": 0.8,
+          "ease": [0.22, 1, 0.36, 1]
+        }
+      }
+    }
+  }
