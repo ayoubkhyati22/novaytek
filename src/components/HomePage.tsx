@@ -15,14 +15,6 @@ export default function HomePage() {
       { 
         url: "images/slide1.jpg", 
         tag: "Global Network Protocol" 
-      },
-      { 
-        url: "images/slide2.jpg", 
-        tag: "Secure Neural Infrastructure" 
-      },
-      { 
-        url: "images/slide3.jpg", 
-        tag: "High-Latency Analytics" 
       }
     ]
   };
