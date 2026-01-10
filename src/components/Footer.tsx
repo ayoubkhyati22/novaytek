@@ -12,15 +12,6 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-/**
- * BRAND PALETTE:
- * Midnight Navy: #001B48
- * Deep Blue: #02457A
- * Ocean Blue: #018ABE
- * Soft Sky Blue: #97CADB
- * Ice Blue: #D6EBEE
- */
-
 export default function Footer() {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
@@ -44,29 +35,29 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#001B48] pt-24 pb-12 overflow-hidden border-t border-[#018ABE]/10">
+    <footer className="relative bg-[#001B48] pt-24 pb-12 overflow-hidden border-t border-[#018ABE]/10 w-full">
       
       {/* Structural Background Accents */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#02457A]/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#97CADB]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 sm:gap-16 mb-20">
           
           {/* Brand Column */}
-          <div className="lg:col-span-4">
-            <h2 className="text-3xl font-black tracking-tighter text-white mb-6 uppercase">
+          <div className="lg:col-span-4 w-full">
+            <h2 className="text-3xl font-black tracking-tighter text-white mb-6 uppercase break-words">
               NOVAY<span className="text-[#018ABE]">TEK</span>
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-sm font-light">
+            <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-sm font-light break-words">
               {t.footer.tagline}
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 flex items-center justify-center rounded-none bg-[#02457A]/30 border border-white/5 text-slate-400 hover:text-white hover:bg-[#018ABE] hover:border-[#018ABE] transition-all duration-300 group"
+                  className="w-10 h-10 flex items-center justify-center rounded-none bg-[#02457A]/30 border border-white/5 text-slate-400 hover:text-white hover:bg-[#018ABE] hover:border-[#018ABE] transition-all duration-300 group flex-shrink-0"
                 >
                   <span className="group-hover:scale-110 transition-transform">
                     {social.icon}
@@ -77,17 +68,17 @@ export default function Footer() {
           </div>
 
           {/* Navigation - Professional List */}
-          <div className="lg:col-span-2">
-            <h4 className="text-white font-black mb-8 uppercase tracking-[0.3em] text-[10px] text-[#D6EBEE]">Sitemap</h4>
+          <div className="lg:col-span-2 w-full">
+            <h4 className="text-white font-black mb-8 uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] text-[#D6EBEE]">Sitemap</h4>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-slate-400 hover:text-[#97CADB] flex items-center group transition-colors text-xs font-black uppercase tracking-widest"
+                    className="text-slate-400 hover:text-[#97CADB] flex items-center group transition-colors text-xs font-black uppercase tracking-widest break-words"
                   >
                     <span>{link.name}</span>
-                    <ArrowUpRight className="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-[#97CADB]" />
+                    <ArrowUpRight className="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-[#97CADB] flex-shrink-0" />
                   </button>
                 </li>
               ))}
@@ -95,39 +86,39 @@ export default function Footer() {
           </div>
 
           {/* Contact Details */}
-          <div className="lg:col-span-3">
-            <h4 className="text-white font-black mb-8 uppercase tracking-[0.3em] text-[10px] text-[#D6EBEE]">Inquiries</h4>
+          <div className="lg:col-span-3 w-full">
+            <h4 className="text-white font-black mb-8 uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] text-[#D6EBEE]">Inquiries</h4>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
-                <div className="p-3 rounded-none bg-[#018ABE]/10 text-[#018ABE] border border-[#018ABE]/10">
+                <div className="p-3 rounded-none bg-[#018ABE]/10 text-[#018ABE] border border-[#018ABE]/10 flex-shrink-0">
                   <Mail size={16} />
                 </div>
-                <div>
-                  <p className="text-[9px] text-slate-500 uppercase font-black tracking-[0.2em] mb-1">Email Protocol</p>
-                  <a href={`mailto:${t.contact.info.emailText}`} className="text-slate-300 hover:text-[#97CADB] transition-colors text-sm font-medium">
+                <div className="min-w-0 flex-1">
+                  <p className="text-[9px] text-slate-500 uppercase font-black tracking-[0.15em] sm:tracking-[0.2em] mb-1">Email Protocol</p>
+                  <a href={`mailto:${t.contact.info.emailText}`} className="text-slate-300 hover:text-[#97CADB] transition-colors text-sm font-medium break-all">
                     {t.contact.info.emailText}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <div className="p-3 rounded-none bg-[#018ABE]/10 text-[#018ABE] border border-[#018ABE]/10">
+                <div className="p-3 rounded-none bg-[#018ABE]/10 text-[#018ABE] border border-[#018ABE]/10 flex-shrink-0">
                   <Phone size={16} />
                 </div>
-                <div>
-                  <p className="text-[9px] text-slate-500 uppercase font-black tracking-[0.2em] mb-1">Direct Line</p>
-                  <p className="text-slate-300 text-sm font-medium">{t.contact.info.phoneText}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[9px] text-slate-500 uppercase font-black tracking-[0.15em] sm:tracking-[0.2em] mb-1">Direct Line</p>
+                  <p className="text-slate-300 text-sm font-medium break-all">{t.contact.info.phoneText}</p>
                 </div>
               </li>
             </ul>
           </div>
 
           {/* Newsletter - Sharp Architectural Box */}
-          <div className="lg:col-span-3">
-            <div className="p-8 rounded-none bg-[#02457A]/20 border border-white/5 relative group overflow-hidden">
+          <div className="lg:col-span-3 w-full">
+            <div className="p-6 sm:p-8 rounded-none bg-[#02457A]/20 border border-white/5 relative group overflow-hidden w-full">
               <div className="absolute top-0 left-0 w-full h-1 bg-[#018ABE] opacity-30 group-hover:opacity-100 transition-opacity" />
               
-              <h4 className="text-lg font-black text-white mb-3 uppercase tracking-tight">Intelligence</h4>
-              <p className="text-xs text-slate-400 mb-6 leading-relaxed font-light">
+              <h4 className="text-lg font-black text-white mb-3 uppercase tracking-tight break-words">Intelligence</h4>
+              <p className="text-xs text-slate-400 mb-6 leading-relaxed font-light break-words">
                 Subscribe to our digital briefings and industrial insights.
               </p>
               
@@ -135,9 +126,9 @@ export default function Footer() {
                 <input 
                   type="email" 
                   placeholder="EMAIL ADDRESS"
-                  className="w-full bg-[#001B48] border border-white/10 rounded-none py-4 px-4 text-white text-[10px] font-black tracking-widest focus:outline-none focus:border-[#018ABE] transition-colors placeholder:text-slate-600"
+                  className="w-full bg-[#001B48] border border-white/10 rounded-none py-4 px-4 text-white text-[10px] font-black tracking-tight sm:tracking-widest focus:outline-none focus:border-[#018ABE] transition-colors placeholder:text-slate-600"
                 />
-                <button className="absolute right-2 top-2 bottom-2 px-3 rounded-none bg-[#018ABE] hover:bg-white hover:text-[#001B48] text-white transition-all">
+                <button className="absolute right-2 top-2 bottom-2 px-3 rounded-none bg-[#018ABE] hover:bg-white hover:text-[#001B48] text-white transition-all flex-shrink-0">
                   <ArrowUpRight size={16} />
                 </button>
               </form>
@@ -146,17 +137,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.3em]">
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+          <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] text-center md:text-left break-words">
             &copy; {currentYear} NOVAYTEK. {t.footer.rights}
           </p>
           
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 justify-center">
             {['Privacy Policy', 'Terms of Service', 'Cookie Settings'].map((text) => (
               <a 
                 key={text} 
                 href="#" 
-                className="text-[9px] text-slate-500 hover:text-[#D6EBEE] uppercase tracking-[0.2em] transition-colors font-black"
+                className="text-[9px] text-slate-500 hover:text-[#D6EBEE] uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-colors font-black whitespace-nowrap"
               >
                 {text}
               </a>
@@ -164,9 +155,9 @@ export default function Footer() {
           </div>
 
           {/* System Status Light */}
-          <div className="flex items-center gap-2 bg-[#97CADB]/5 px-4 py-1.5 border border-[#97CADB]/10">
+          <div className="flex items-center gap-2 bg-[#97CADB]/5 px-4 py-1.5 border border-[#97CADB]/10 flex-shrink-0">
             <div className="w-1.5 h-1.5 rounded-none bg-[#97CADB] animate-pulse" />
-            <span className="text-[#97CADB] text-[9px] font-black uppercase tracking-[0.2em]">Systems Nominal</span>
+            <span className="text-[#97CADB] text-[9px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] whitespace-nowrap">Systems Nominal</span>
           </div>
         </div>
       </div>
