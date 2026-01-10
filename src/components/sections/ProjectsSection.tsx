@@ -68,7 +68,7 @@ export default function ProjectsSection({ images, animations }: ProjectsSectionP
                   {project.description}
                 </p>
                 <div className="pt-8 border-t border-slate-100 group-hover:border-white/10 flex items-center justify-between text-[#001B48] group-hover:text-[#97CADB] font-black text-[10px] tracking-[0.3em] uppercase transition-all duration-500">
-                   Technical Review <ArrowRight size={16} />
+                   View <ArrowRight size={16} />
                 </div>
               </div>
             </motion.div>
