@@ -37,15 +37,15 @@
     },
     "projects": {
       "images": [
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80"
+        "images/slide1.jpg",
+        "images/slide1.jpg",
+        "images/slide1.jpg"
       ],
       "gridColumns": 3,
       "showTechBadge": true
     },
     "about": {
-      "mainImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80",
+      "mainImage": "images/slide1.jpg",
       "mainImageAlt": "Infrastructure",
       "imageHeight": "700px",
       "shadowColor": "#D6EBEE",
