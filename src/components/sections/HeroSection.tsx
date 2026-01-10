@@ -31,7 +31,8 @@ export default function HeroSection({ content }: HeroSectionProps) {
 
   useEffect(() => {
     if (slideCount === 0) return;
-    const timer = setInterval(() => paginate(1), 6000);
+    // Changed from 6000ms to 3500ms for faster auto-advance
+    const timer = setInterval(() => paginate(1), 3500);
     return () => clearInterval(timer);
   }, [paginate, slideCount]);
 
@@ -44,7 +45,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
     enter: (direction: number) => ({
       x: direction > 0 ? '100%' : '-100%',
       opacity: 0,
-      scale: 1.2
+      scale: 1.1
     }),
     center: {
       zIndex: 1,
@@ -53,8 +54,9 @@ export default function HeroSection({ content }: HeroSectionProps) {
       scale: 1,
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.8 },
-        scale: { duration: 8, ease: "linear" } 
+        opacity: { duration: 0.6 },
+        // Changed from 8 seconds to 4 seconds for faster zoom
+        scale: { duration: 4, ease: "linear" } 
       }
     },
     exit: (direction: number) => ({
@@ -63,7 +65,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
       opacity: 0,
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.4 }
+        opacity: { duration: 0.3 }
       }
     })
   };
@@ -100,7 +102,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
             >
               <div className="inline-flex items-center space-x-3 bg-[#018ABE]/20 backdrop-blur-md border border-[#97CADB]/30 px-4 py-2 mb-8">
                 <Sparkles className="w-3 h-3 text-[#97CADB]" />
@@ -151,7 +153,8 @@ export default function HeroSection({ content }: HeroSectionProps) {
                  key={current}
                  initial={{ width: 0 }}
                  animate={{ width: "100%" }}
-                 transition={{ duration: 6, ease: "linear" }}
+                 // Changed from 6 seconds to 3.5 seconds to match auto-advance
+                 transition={{ duration: 3.5, ease: "linear" }}
                  className="absolute inset-y-0 left-0 bg-[#97CADB]"
                />
             </div>
