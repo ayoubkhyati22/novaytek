@@ -118,7 +118,7 @@ import {
               />
             </div>
             {/* Smooth Floating Card */}
-            <motion.div 
+            {/* <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-10 -left-10 bg-[#02457A] p-8 border border-white/20 shadow-2xl z-20 rounded-none"
@@ -126,7 +126,7 @@ import {
               <Shield className="text-[#97CADB] w-8 h-8 mb-4" />
               <p className="text-white font-black text-xs uppercase tracking-[0.2em]">Validated Protocol</p>
               <div className="w-12 h-1 bg-[#018ABE] mt-2" />
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </section>
@@ -189,12 +189,9 @@ import {
   function ProjectsSection() {
     const { t } = useLanguage();
     const images = [
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80"
     ];
   
     return (

@@ -16,19 +16,11 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-      setShowLangMenu(false);
-    } else {
-      setHidden(false);
-    }
     setIsScrolled(latest > 80);
   });
 
@@ -56,10 +48,7 @@ export default function Navigation() {
   ];
 
   return (
-    <motion.header
-      variants={{ visible: { y: 0 }, hidden: { y: -100 } }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.3, ease: "circOut" }}
+    <header
       className={`fixed w-full z-[100] transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md border-b border-[#D6EBEE] py-4' 
@@ -219,6 +208,6 @@ export default function Navigation() {
           </>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
