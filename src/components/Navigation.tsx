@@ -62,17 +62,17 @@ export default function Navigation() {
     <header
       className={`fixed w-full z-[100] transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md border-b border-[#D6EBEE] py-3' 
-          : 'bg-transparent py-6'
+          ? 'bg-white/95 backdrop-blur-md border-b border-[#D6EBEE] py-2 sm:py-3' 
+          : 'bg-transparent py-4 sm:py-6'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center min-h-[48px] sm:min-h-0">
           
           {/* LOGO - Using SVG images with smooth transition */}
           <button 
             onClick={() => scrollToSection('home')}
-            className="flex items-center outline-none group relative h-12 sm:h-14"
+            className="flex items-center outline-none group relative h-10 sm:h-12 md:h-14"
           >
             {/* White logo for transparent header */}
             <img 
@@ -150,13 +150,13 @@ export default function Navigation() {
           </div>
 
           {/* MOBILE TOGGLE - FIXED POSITIONING */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(true)}
-              className={`p-2 ${isScrolled ? 'text-[#001B48]' : 'text-white'}`}
+              className={`p-1.5 sm:p-2 ${isScrolled ? 'text-[#001B48]' : 'text-white'}`}
               aria-label="Open menu"
             >
-              <Menu size={24} />
+              <Menu size={22} className="sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>
