@@ -1,9 +1,6 @@
 import { LanguageProvider } from './i18n/LanguageContext';
 import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import About from './components/About';
-import Contact from './components/Contact';
+import HomePage from './components/HomePage';
 import Footer from './components/Footer';
 
 function App() {
@@ -11,10 +8,7 @@ function App() {
     <LanguageProvider>
       <div className="min-h-screen">
         <Navigation />
-        <Hero />
-        <Projects />
-        <About />
-        <Contact />
+        <HomePage />
         <Footer />
       </div>
     </LanguageProvider>
