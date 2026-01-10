@@ -13,15 +13,15 @@ export default function HomePage() {
   const heroSlides = {
     slides: [
       { 
-        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80", 
+        url: "images/slide1.jpg", 
         tag: "Global Network Protocol" 
       },
       { 
-        url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 
+        url: "images/slide2.jpg", 
         tag: "Secure Neural Infrastructure" 
       },
       { 
-        url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80", 
+        url: "images/slide3.jpg", 
         tag: "High-Latency Analytics" 
       }
     ]
