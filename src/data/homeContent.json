@@ -1,8 +1,8 @@
 {
     "hero": {
-      "backgroundImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
+      "backgroundImage": "",
       "taglineIcon": "Sparkles",
-      "primaryImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
+      "primaryImage": "",
       "primaryImageAlt": "Architecture",
       "floatingCard": {
         "enabled": false,
